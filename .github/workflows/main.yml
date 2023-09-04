@@ -4,8 +4,6 @@ on:
     schedule:
         - cron: '0 18 * * *'
 
-permissions: read-all|write-all
-
 jobs:
     build:
         runs-on: ubuntu-latest
