@@ -1,8 +1,9 @@
 name: tophubToday
 
 on:
+    push:
     schedule:
-        - cron: '49 19 * * *'
+        - cron: '00 18 * * *'
 
 jobs:
     build:
