@@ -2,7 +2,7 @@ name: tophubToday
 
 on:
     schedule:
-        - cron: '30 10 * * *'
+        - cron: '00 10,15 * * *'
 
 jobs:
     build:
@@ -19,10 +19,6 @@ jobs:
               run: |
                   python -m pip install --upgrade pip
                   pip install -r requirements.txt
-            - name: 'set-timezone'
-              uses: szenius/set-timezone@v1.0
-              with:
-                  timezoneLinux: "Asia/Shanghai"
             - name: 'Working'
               run: 
                   python3 ./tophubToday.py
