@@ -63,7 +63,10 @@ def saveFile(data: list, file_name: str):
 
 def readFile(file_name: str) -> list:
     with open(file_name, 'r', encoding='utf-8') as f:
-        return eval(f.read())
+        try:
+            return eval(f.read())
+        finally:
+            return []
 
 if __name__ == "__main__":
     search_terms = tophubToday()
