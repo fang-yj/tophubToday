@@ -2,7 +2,7 @@ name: tophubToday
 
 on:
     schedule:
-        - cron: '00 10 * * *'
+        - cron: '30 10 * * *'
 
 jobs:
     build:
