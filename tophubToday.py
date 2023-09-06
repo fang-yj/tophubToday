@@ -65,7 +65,7 @@ def readFile(file_name: str) -> list:
     with open(file_name, 'r', encoding='utf-8') as f:
         try:
             return eval(f.read())
-        finally:
+        except:
             return []
 
 if __name__ == "__main__":
