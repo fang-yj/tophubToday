@@ -10,7 +10,7 @@ on:
             tags:
                 description: 'test'
     schedule:
-        - cron: '00 10,15 * * *'
+        - cron: '00 15 * * *'
 
 permissions: write-all
 
