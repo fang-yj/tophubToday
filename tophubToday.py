@@ -46,13 +46,13 @@ def tophubToday()-> list:
         tempList = list(set(searchTerms).difference(set(search_terms)))
         searchTerms.extend(search_terms)
         print(len(searchTerms))
-        saveFile(search_terms, "./totalWords.txt")
+        saveFile(searchTerms, "./totalWords.txt")
     else:
         search_terms = readFile("./totalWords.txt")
         tempList = list(set(searchTerms).difference(set(search_terms)))
         searchTerms.extend(search_terms)
         print(len(searchTerms))
-        saveFile(search_terms, "./totalWords.txt")
+        saveFile(searchTerms, "./totalWords.txt")
     return tempList
 
 def saveFile(data: list, file_name: str):
@@ -71,7 +71,9 @@ def readFile(file_name: str) -> list:
 if __name__ == "__main__":
     search_terms = tophubToday()
     print(len(search_terms))
-    search_terms.extend(readFile("./words.txt"))
+    oldWords = readFile("./words.txt")
+    if len(oldWords) > 0:
+        search_terms.extend(oldWords)
     search_terms = list(set(search_terms))
     print(len(search_terms))
     saveFile(search_terms, "./words.txt")
