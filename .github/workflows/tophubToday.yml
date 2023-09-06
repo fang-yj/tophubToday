@@ -39,6 +39,7 @@ jobs:
                   git add .
                   git commit -m "update" -a
             - name: Push changes
-              uses: fang-yj/tophubToday@master
               env:
+                  REPO: self
+                  BRANCH: main
                   GITHUB_TOKEN: ${{ secrets.TOKEN }}
