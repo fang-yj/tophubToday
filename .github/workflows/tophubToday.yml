@@ -32,3 +32,13 @@ jobs:
             - name: 'Working'
               run: 
                   python3 ./tophubToday.py
+            - name: commit
+              run: |
+                  git config --global user.email fang-yj@qq.com
+                  git config --global user.name fang-yj
+                  git add .
+                  git commit -m "update" -a
+            - name: Push changes
+              uses: ad-m/github-push-action@master
+              with:
+                  github_token: ${{ secrets.TOKEN }}
