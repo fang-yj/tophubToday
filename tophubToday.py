@@ -5,15 +5,7 @@ from random import randint
 import requests
 from bs4 import BeautifulSoup
 
-query_id = ["mproPpoq6O", "KqndgxeLl9", "WnBe01o371", "wWmoO5Rd4E", "Jb0vmloB1G",
-            "74KvxwokxM", "KMZd7VOvrO", "Q1Vd5Ko85R", "DpQvNABoNE", "Y2KeDGQdNP",
-            "NKGoRAzel6", "mDOvnyBoEB", "5VaobgvAj1", "x9ozB4KoXb", "7Gdab3peQy",
-            "74Kvx59dkx", "NRrvWq3e5z", "qENeYpdY49", "x9ozqX7eXb", "x9ozBY7oXb",
-            "rx9ozj7oXb", "KqndgDmeLl", "KMZd7X3erO", "Jb0vml8oB1", "YqoXQEqvOD",
-            "KMZd76vrOw", "wWmoOVYe4E", "YqoXQR0vOD", "n3moBE1eN5", "LBwdG0jePx",
-            "DgeyrgMoZq", "5VaobmGeAj", "nBe0WR5d37", "Q0or4Wnd8B", "YqoXQGXvOD",
-            "qYwv4MNdPa", "NRrvWG1v5z", "Kqndg1xoLl", "rYqoXQ8vOD", "20MdKx4ew1",
-            "6ARe1YLe7n", "Om4ej8mvxE", "b0vmYyJvB1", "VaobmGneAj", "rYqoXz6dOD"]
+query_id = ["mproPpoq6O"]
 query_name = ["知乎 ‧ 热榜", "微博 ‧ 热搜榜", "微信 ‧ 24h热文榜", "澎湃 ‧ 热榜", "百度 ‧ 实时热点",
               "哔哩哔哩 ‧ 全站日榜", "知乎日报 ‧ Today", "36氪 ‧ 24小时热榜", "抖音 ‧ 热门视频榜", "少数派 ‧ 热门文章",
               "吾爱破解 ‧ 今日热帖", "豆瓣电影 ‧ 豆瓣新片榜", "虎嗅网 ‧ 热文", "今日头条 ‧ 头条热榜", "淘宝 ‧ 天猫 ‧ 每日爆款清单",
@@ -43,37 +35,36 @@ def tophubToday()-> list:
     
     if not os.path.exists("./totalWords.txt") :
         search_terms = readFile("./words.txt")
-        tempList = list(set(searchTerms).difference(set(search_terms)))
+        tempList = list(set(searchTerms) - set(search_terms))
         searchTerms.extend(search_terms)
-        print(len(searchTerms))
-        saveFile(searchTerms, "./totalWords.txt")
+        saveFile(tempList, "./totalWords.txt")
     else:
         search_terms = readFile("./totalWords.txt")
-        tempList = list(set(searchTerms).difference(set(search_terms)))
+        tempList = list(set(searchTerms) - set(search_terms))
+        saveList = [item.replace('\n', '').replace('\r', '').replace("?", "").replace("/", " ") for item in tempList if len(item) > 2]
         searchTerms.extend(search_terms)
-        print(len(searchTerms))
-        saveFile(searchTerms, "./totalWords.txt")
-    return tempList
+        saveFile(saveList, "./totalWords.txt")
+    print(f"searchTerms 长度：{len(searchTerms)}")
+    print(f"saveList 长度：{len(saveList)}")
+    return list(filter(None,saveList))
 
 def saveFile(data: list, file_name: str):
-    file = open(file_name, 'w', encoding='utf-8')
-    file.write(str(data))
-    file.close()
+    with open(file_name,"a",encoding="utf-8") as f:
+        f.write("\n".join(data))
+        f.write("\n")
 
 
 def readFile(file_name: str) -> list:
-    with open(file_name, 'r', encoding='utf-8') as f:
-        try:
+    try:
+        with open(file_name, 'r', encoding='utf-8') as f:
             return eval(f.read())
-        except:
-            return []
+    except:
+        with open(file_name, 'r', encoding='utf-8') as f:
+            return f.read().splitlines()
 
 if __name__ == "__main__":
-    search_terms = tophubToday()
-    print(len(search_terms))
+    saveList = tophubToday()
     oldWords = readFile("./words.txt")
-    if len(oldWords) > 0:
-        search_terms.extend(oldWords)
-    search_terms = list(set(search_terms))
-    print(len(search_terms))
-    saveFile(search_terms, "./words.txt")
+    saveFile(saveList, "./words.txt")
+    oldWords.extend(saveList)
+    print(len(oldWords))
