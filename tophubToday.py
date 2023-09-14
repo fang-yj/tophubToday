@@ -5,7 +5,15 @@ from random import randint
 import requests
 from bs4 import BeautifulSoup
 
-query_id = ["mproPpoq6O"]
+query_id = ["mproPpoq6O", "KqndgxeLl9", "WnBe01o371", "wWmoO5Rd4E", "Jb0vmloB1G",
+            "74KvxwokxM", "KMZd7VOvrO", "Q1Vd5Ko85R", "DpQvNABoNE", "Y2KeDGQdNP",
+            "NKGoRAzel6", "mDOvnyBoEB", "5VaobgvAj1", "x9ozB4KoXb", "7Gdab3peQy",
+            "74Kvx59dkx", "NRrvWq3e5z", "qENeYpdY49", "x9ozqX7eXb", "x9ozBY7oXb",
+            "rx9ozj7oXb", "KqndgDmeLl", "KMZd7X3erO", "Jb0vml8oB1", "YqoXQEqvOD",
+            "KMZd76vrOw", "wWmoOVYe4E", "YqoXQR0vOD", "n3moBE1eN5", "LBwdG0jePx",
+            "DgeyrgMoZq", "5VaobmGeAj", "nBe0WR5d37", "Q0or4Wnd8B", "YqoXQGXvOD",
+            "qYwv4MNdPa", "NRrvWG1v5z", "Kqndg1xoLl", "rYqoXQ8vOD", "20MdKx4ew1",
+            "6ARe1YLe7n", "Om4ej8mvxE", "b0vmYyJvB1", "VaobmGneAj", "rYqoXz6dOD"]
 query_name = ["知乎 ‧ 热榜", "微博 ‧ 热搜榜", "微信 ‧ 24h热文榜", "澎湃 ‧ 热榜", "百度 ‧ 实时热点",
               "哔哩哔哩 ‧ 全站日榜", "知乎日报 ‧ Today", "36氪 ‧ 24小时热榜", "抖音 ‧ 热门视频榜", "少数派 ‧ 热门文章",
               "吾爱破解 ‧ 今日热帖", "豆瓣电影 ‧ 豆瓣新片榜", "虎嗅网 ‧ 热文", "今日头条 ‧ 头条热榜", "淘宝 ‧ 天猫 ‧ 每日爆款清单",
