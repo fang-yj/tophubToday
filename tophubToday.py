@@ -29,8 +29,9 @@ headers = {'Content-Type': "application/x-www-form-urlencoded",
            }
 
 def tophubToday()-> list:
-    searchTerms: list[str] = []
+    searchTerms = []
     saveList = []
+    search_terms = []
     for x in range(len(query_id)):
         print(f"query_name_{x} 为：", str(query_name[x]))
         r = requests.get(f"https://tophub.today/n/{query_id[x]}", headers=headers)
@@ -45,15 +46,15 @@ def tophubToday()-> list:
         search_terms = readFile("./words.txt")
         tempList = list(set(searchTerms) - set(search_terms))
         saveList = [item.replace('\n', '').replace('\r', '').replace("?", "").replace("/", " ") for item in tempList if len(item) > 2]
-        searchTerms.extend(search_terms)
+        search_terms.extend(saveList)
         saveFile(saveList, "./totalWords.txt")
     else:
         search_terms = readFile("./totalWords.txt")
         tempList = list(set(searchTerms) - set(search_terms))
         saveList = [item.replace('\n', '').replace('\r', '').replace("?", "").replace("/", " ") for item in tempList if len(item) > 2]
-        searchTerms.extend(search_terms)
+        search_terms.extend(saveList)
         saveFile(saveList, "./totalWords.txt")
-    print(f"searchTerms 长度：{len(searchTerms)}")
+    print(f"search_terms 长度：{len(search_terms)}")
     print(f"saveList 长度：{len(saveList)}")
     return list(filter(None,saveList))
 
