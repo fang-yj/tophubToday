@@ -59,7 +59,7 @@ def tophubToday()-> list:
     return list(filter(None,saveList))
 
 def saveFile(data: list, file_name: str):
-    if len(readFile(file_name)) > 15000:
+    if len(readFile(file_name)) > 15000 and "total" not in file_name:
         with open(file_name,"w",encoding="utf-8") as f:
             f.write("\n".join(data))
             f.write("\n")
