@@ -59,9 +59,14 @@ def tophubToday()-> list:
     return list(filter(None,saveList))
 
 def saveFile(data: list, file_name: str):
-    with open(file_name,"a",encoding="utf-8") as f:
-        f.write("\n".join(data))
-        f.write("\n")
+    if len(readFile(file_name)) > 15000:
+        with open(file_name,"w",encoding="utf-8") as f:
+            f.write("\n".join(data))
+            f.write("\n")
+    else:
+        with open(file_name,"a",encoding="utf-8") as f:
+            f.write("\n".join(data))
+            f.write("\n")
 
 
 def readFile(file_name: str) -> list:
